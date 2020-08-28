@@ -1,0 +1,38 @@
+mysql> create schema dac113;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> drop database if exists cdacdb;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> use cdacdb;
+ERROR 1049 (42000): Unknown database 'cdacdb'
+mysql> create table dac113.SEMP(
+    -> EMPNO CHAR(4),
+    -> EMPNAME CHAR(20),
+    -> BASIC FLOAT(9,2),
+    -> DEPTNO CHAR(2),
+    -> DEPTHEAD CHAR(4));
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> create table dac113.SDEPT( DEPTNO CHAR(2), DEPTNAME CHAR(15));
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> insert into dac113.SDEPT (DEPTNO, DEPTNAME) values ('10', 'Development');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into dac113.SDEPT (DEPTNO, DEPTNAME) values ('20', 'Training');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into dac113.SEMP (EMPNO, EMPNAME, BASIC, DEPTNO, DEPTHEAD) values (0001, 'SUNIL', 6000, '10', '');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into dac113.SEMP (EMPNO, EMPNAME, BASIC, DEPTNO, DEPTHEAD) values (0002, 'HIREN', 8000, '20', '');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into dac113.SEMP (EMPNO, EMPNAME, BASIC, DEPTNO, DEPTHEAD) values (0003, 'ALL', 4000, '10', '0001');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into dac113.SEMP (EMPNO, EMPNAME, BASIC, DEPTNO, DEPTHEAD) values (0004, 'GEORGE', 6000, '', '0002');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> NOTEE;

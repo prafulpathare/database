@@ -1,0 +1,93 @@
+SQL> SELECT * FROM ORDERS WHERE AMT > 1000;
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3002     1900.1 03-OCT-90       2007       1004                           
+      3005    5160.45 03-OCT-90       2003       1002                           
+      3006    1098.16 03-OCT-90       2008       1007                           
+      3009    1713.23 04-OCT-90       2002       1003                           
+      3008       4723 05-OCT-90       2006       1001                           
+      3010    1309.95 06-OCT-90       2004       1002                           
+      3011    9891.88 06-OCT-90       2006       1001                           
+
+7 rows selected.
+
+SQL> SELECT CNAME, CITY FROM SALESPEOPLE WHERE CITY = 'London' AND COMM > .1;
+SELECT CNAME, CITY FROM SALESPEOPLE WHERE CITY = 'London' AND COMM > .1
+       *
+ERROR at line 1:
+ORA-00904: "CNAME": invalid identifier 
+
+
+SQL> SELECT SNAME, CITY FROM SALESPEOPLE WHERE CITY = 'London' AND COMM > .1;
+
+SNAME      CITY                                                                 
+---------- ----------                                                           
+Peel       London                                                               
+Motika     London                                                               
+
+SQL> SELECT * FROM CUSTOMERS WHERE RATING > 100 OR CITY = 'Rome';
+
+      CNUM CNAME      CITY           RATING       SNUM                          
+---------- ---------- ---------- ---------- ----------                          
+      2002 Giovanni   Rome              200       1003                          
+      2003 Liu        San Jose          200       1002                          
+      2004 Grass      Berlin            300       1002                          
+      2008 Cisneros   San Jose          300       1007                          
+      2007 Pereira    Rome              100       1004                          
+
+SQL> SELECT * FROM ORDERS WHERE (AMT < 1000 OR NOT (ODATE = '03-OCT-1990' AND CNUM > 2003));
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3001      18.69 03-OCT-90       2008       1007                           
+      3003     767.19 03-OCT-90       2001       1001                           
+      3005    5160.45 03-OCT-90       2003       1002                           
+      3009    1713.23 04-OCT-90       2002       1003                           
+      3007      75.75 04-OCT-90       2004       1002                           
+      3008       4723 05-OCT-90       2006       1001                           
+      3010    1309.95 06-OCT-90       2004       1002                           
+      3011    9891.88 06-OCT-90       2006       1001                           
+
+8 rows selected.
+
+SQL> SELECT * FROM ORDERS WHERE NOT ((ODATE = '03-OCT-1990' OR SNUM > 1006) AND AMT >= 1500);
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3001      18.69 03-OCT-90       2008       1007                           
+      3003     767.19 03-OCT-90       2001       1001                           
+      3006    1098.16 03-OCT-90       2008       1007                           
+      3009    1713.23 04-OCT-90       2002       1003                           
+      3007      75.75 04-OCT-90       2004       1002                           
+      3008       4723 05-OCT-90       2006       1001                           
+      3010    1309.95 06-OCT-90       2004       1002                           
+      3011    9891.88 06-OCT-90       2006       1001                           
+
+8 rows selected.
+
+SQL> promt "Simpler way for Question no. 6"
+SP2-0734: unknown command beginning "promt "Sim..." - rest of line ignored.
+SQL> prompt "Simpler way for Question no. 6"
+"Simpler way for Question no. 6"
+SQL> SELECT SNUM, SNAME, CITY, COMM FROM SALESPEOPLE WHERE (COMM > .12 OR COMM < .14);
+
+      SNUM SNAME      CITY             COMM                                     
+---------- ---------- ---------- ----------                                     
+      1001 Peel       London            .12                                     
+      1002 Serres     San Jose          .13                                     
+      1004 Motika     London            .11                                     
+      1007 Rifkin     Barcelona         .15                                     
+      1003 Axelrod    New York           .1                                     
+
+SQL> SELECT SNUM, SNAME, CITY, COMM FROM SALESPEOPLE;
+
+      SNUM SNAME      CITY             COMM                                     
+---------- ---------- ---------- ----------                                     
+      1001 Peel       London            .12                                     
+      1002 Serres     San Jose          .13                                     
+      1004 Motika     London            .11                                     
+      1007 Rifkin     Barcelona         .15                                     
+      1003 Axelrod    New York           .1                                     
+
+SQL> spool off

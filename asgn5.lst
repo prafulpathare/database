@@ -12,13 +12,6 @@ SQL> SELECT * FROM ORDERS WHERE AMT > 1000;
 
 7 rows selected.
 
-SQL> SELECT CNAME, CITY FROM SALESPEOPLE WHERE CITY = 'London' AND COMM > .1;
-SELECT CNAME, CITY FROM SALESPEOPLE WHERE CITY = 'London' AND COMM > .1
-       *
-ERROR at line 1:
-ORA-00904: "CNAME": invalid identifier 
-
-
 SQL> SELECT SNAME, CITY FROM SALESPEOPLE WHERE CITY = 'London' AND COMM > .1;
 
 SNAME      CITY                                                                 
@@ -65,20 +58,6 @@ SQL> SELECT * FROM ORDERS WHERE NOT ((ODATE = '03-OCT-1990' OR SNUM > 1006) AND 
       3011    9891.88 06-OCT-90       2006       1001                           
 
 8 rows selected.
-
-SQL> promt "Simpler way for Question no. 6"
-SP2-0734: unknown command beginning "promt "Sim..." - rest of line ignored.
-SQL> prompt "Simpler way for Question no. 6"
-"Simpler way for Question no. 6"
-SQL> SELECT SNUM, SNAME, CITY, COMM FROM SALESPEOPLE WHERE (COMM > .12 OR COMM < .14);
-
-      SNUM SNAME      CITY             COMM                                     
----------- ---------- ---------- ----------                                     
-      1001 Peel       London            .12                                     
-      1002 Serres     San Jose          .13                                     
-      1004 Motika     London            .11                                     
-      1007 Rifkin     Barcelona         .15                                     
-      1003 Axelrod    New York           .1                                     
 
 SQL> SELECT SNUM, SNAME, CITY, COMM FROM SALESPEOPLE;
 

@@ -1,0 +1,13 @@
+SQL> select S1.sname, S2.sname, S2.city from salespeople S1 inner join salespeople S2 ON S1.sname <= S2.sname and S1.city = S2.city and S1.snum <> S2.snum;
+
+SNAME      SNAME      CITY                                                      
+---------- ---------- ----------                                                
+Motika     Peel       London                                                    
+
+SQL> select C1.cname, C1.city from customers C1 inner join customers C2 on C1.rating = C2.rating Where C2.cname = 'Hoffman';
+
+CNAME      CITY                                                                 
+---------- ----------                                                           
+Hoffman    London                                                               
+Clemens    London                                                               
+Pereira    Rome                                                                 

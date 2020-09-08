@@ -1,0 +1,68 @@
+SQL> select * from orders where odate in (to_date('03-OCT-1990', 'DD-MON-YYYY'), to_date('04-OCT-1990'));
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3001      18.69 03-OCT-90       2008       1007                           
+      3003     767.19 03-OCT-90       2001       1001                           
+      3002     1900.1 03-OCT-90       2007       1004                           
+      3005    5160.45 03-OCT-90       2003       1002                           
+      3006    1098.16 03-OCT-90       2008       1007                           
+      3009    1713.23 04-OCT-90       2002       1003                           
+      3007      75.75 04-OCT-90       2004       1002                           
+
+7 rows selected.
+
+SQL> select * from orders where odate = any(to_date('03-OCT-1990', 'DD-MON-YYYY'), to_date('04-OCT-1990'));
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3001      18.69 03-OCT-90       2008       1007                           
+      3003     767.19 03-OCT-90       2001       1001                           
+      3002     1900.1 03-OCT-90       2007       1004                           
+      3005    5160.45 03-OCT-90       2003       1002                           
+      3006    1098.16 03-OCT-90       2008       1007                           
+      3009    1713.23 04-OCT-90       2002       1003                           
+      3007      75.75 04-OCT-90       2004       1002                           
+
+7 rows selected.
+
+SQL> select * from customers where snum in (select snum from salespeople where sname in ('Peel', 'Motika'));
+
+      CNUM CNAME      CITY           RATING       SNUM                          
+---------- ---------- ---------- ---------- ----------                          
+      2006 Clemens    London            100       1001                          
+      2001 Hoffman    London            100       1001                          
+      2007 Pereira    Rome              100       1004                          
+
+SQL> select * from customers where REGEXP_LIKE(cname, '^[A-G]', 'i');
+
+      CNUM CNAME      CITY           RATING       SNUM                          
+---------- ---------- ---------- ---------- ----------                          
+      2002 Giovanni   Rome              200       1003                          
+      2004 Grass      Berlin            300       1002                          
+      2006 Clemens    London            100       1001                          
+      2008 Cisneros   San Jose          300       1007                          
+
+SQL> select * from customers where cname like 'C%';
+
+      CNUM CNAME      CITY           RATING       SNUM                          
+---------- ---------- ---------- ---------- ----------                          
+      2006 Clemens    London            100       1001                          
+      2008 Cisneros   San Jose          300       1007                          
+
+SQL> select * from orders where amt !=0 or amt IS NOT NULL;
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3001      18.69 03-OCT-90       2008       1007                           
+      3003     767.19 03-OCT-90       2001       1001                           
+      3002     1900.1 03-OCT-90       2007       1004                           
+      3005    5160.45 03-OCT-90       2003       1002                           
+      3006    1098.16 03-OCT-90       2008       1007                           
+      3009    1713.23 04-OCT-90       2002       1003                           
+      3007      75.75 04-OCT-90       2004       1002                           
+      3008       4723 05-OCT-90       2006       1001                           
+      3010    1309.95 06-OCT-90       2004       1002                           
+      3011    9891.88 06-OCT-90       2006       1001                           
+
+10 rows selected.

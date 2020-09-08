@@ -1,5 +1,45 @@
-select count(*) from Customers where city is not null;
-select cnum, min(amt) from orders group by cnum;
-select * from (select * from customers where cname like 'G%' order by cname) where rownum = 1;
-select city, max(rating) from customers group by city;
+SQL> select count(*) from orders where odate = to_date('03-OCT-1990', 'DD-MON-YYYY');
+
+  COUNT(*)                                                                      
+----------                                                                      
+         5                                                                      
+
+SQL> select count(*) from Customers where city is not null;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         7                                                                      
+
+SQL> select cnum, min(amt) from orders group by cnum;
+
+      CNUM   MIN(AMT)                                                           
+---------- ----------                                                           
+      2001     767.19                                                           
+      2006       4723                                                           
+      2007     1900.1                                                           
+      2003    5160.45                                                           
+      2004      75.75                                                           
+      2008      18.69                                                           
+      2002    1713.23                                                           
+
+7 rows selected.
+
+SQL> select * from (select * from customers where cname like 'G%' order by cname) where rownum = 1;
+
+      CNUM CNAME      CITY           RATING       SNUM                          
+---------- ---------- ---------- ---------- ----------                          
+      2002 Giovanni   Rome              200       1003                          
+
+SQL> select city, max(rating) from customers group by city;
+
+CITY       MAX(RATING)                                                          
+---------- -----------                                                          
+London             100                                                          
+Berlin             300                                                          
+Rome               200                                                          
+San Jose           300                                                          
+
+
+-- last question remaining
+
 

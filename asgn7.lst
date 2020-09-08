@@ -1,0 +1,5 @@
+select count(*) from Customers where city is not null;
+select cnum, min(amt) from orders group by cnum;
+select * from (select * from customers where cname like 'G%' order by cname) where rownum = 1;
+select city, max(rating) from customers group by city;
+

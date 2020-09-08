@@ -1,0 +1,16 @@
+SQL> select * from orders where cnum = (select cnum from customers where cname = 'Cisneros');
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3001      18.69 03-OCT-90       2008       1007                           
+      3006    1098.16 03-OCT-90       2008       1007                           
+
+SQL> spool off
+SQL> select cname, rating from customers where cnum in (select cnum from orders where amt > (select avg(amt) from orders));
+
+CNAME          RATING                                                           
+---------- ----------                                                           
+Liu               200                                                           
+Clemens           100                                                           
+
+SQL> spool off

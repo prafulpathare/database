@@ -1,0 +1,48 @@
+SQL> select * from customers where rating >= any(select rating from customers where snum = (select snum from salespeople where sname = 'Serres'));
+
+      CNUM CNAME      CITY           RATING       SNUM                          
+---------- ---------- ---------- ---------- ----------                          
+      2004 Grass      Berlin            300       1002                          
+      2008 Cisneros   San Jose          300       1007                          
+      2003 Liu        San Jose          200       1002                          
+      2002 Giovanni   Rome              200       1003                          
+
+SQL> spool off
+SQL> select * from salespeople where city != all(select distinct city from customers);
+
+      SNUM SNAME      CITY             COMM                                     
+---------- ---------- ---------- ----------                                     
+      1003 Axelrod    New York           .1                                     
+      1007 Rifkin     Barcelona         .15                                     
+
+SQL> spool off
+SQL> select * from orders where amt > any ( select amt from orders where cnum in (select cnum from customers where city = 'London'));
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3011    9891.88 06-OCT-90       2006       1001                           
+      3005    5160.45 03-OCT-90       2003       1002                           
+      3008       4723 05-OCT-90       2006       1001                           
+      3002     1900.1 03-OCT-90       2007       1004                           
+      3009    1713.23 04-OCT-90       2002       1003                           
+      3010    1309.95 06-OCT-90       2004       1002                           
+      3006    1098.16 03-OCT-90       2008       1007                           
+
+7 rows selected.
+
+SQL> spool off
+SQL> select * from orders where amt > (select min(amt) from orders where cnum in (select cnum from customers where city = 'London'));
+
+      ONUM        AMT ODATE           CNUM       SNUM                           
+---------- ---------- --------- ---------- ----------                           
+      3002     1900.1 03-OCT-90       2007       1004                           
+      3005    5160.45 03-OCT-90       2003       1002                           
+      3006    1098.16 03-OCT-90       2008       1007                           
+      3009    1713.23 04-OCT-90       2002       1003                           
+      3008       4723 05-OCT-90       2006       1001                           
+      3010    1309.95 06-OCT-90       2004       1002                           
+      3011    9891.88 06-OCT-90       2006       1001                           
+
+7 rows selected.
+
+SQL> spool off

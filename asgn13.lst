@@ -39,3 +39,13 @@ SQL> select snum from salespeople where city = 'San Jose' union select cnum from
       3006                                                                      
 
 8 rows selected.
+SQL> update customers set rating = rating + 100 where city = 'Rome';
+
+2 rows updated.
+
+SQL> spool off
+SQL> delete from customers where cname = 'Clemens';
+
+1 row deleted.
+
+SQL> spool off

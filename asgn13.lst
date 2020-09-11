@@ -1,0 +1,47 @@
+SQL> select cname, city, rating, case when rating >= 200 then 'High Rating' end from customers where rating >= 200
+  2  union
+  3  select cname, city, rating, case when rating < 200 then 'Low Rating' end from customers where rating < 200;
+
+CNAME      CITY           RATING CASEWHENRAT                                    
+---------- ---------- ---------- -----------                                    
+Cisneros   San Jose          300 High Rating                                    
+Clemens    London            100 Low Rating                                     
+Giovanni   Rome              200 High Rating                                    
+Grass      Berlin            300 High Rating                                    
+Hoffman    London            100 Low Rating                                     
+Liu        San Jose          200 High Rating                                    
+Pereira    Rome              100 Low Rating                                     
+
+7 rows selected.
+
+SQL> spool off
+SQL> select snum num, sname name from salespeople where snum in (select t.snum from (select snum, count(snum) cntr from orders group by snum) t where t.cntr > 1) union select cnum num, cname name from customers where cnum in (select t.cnum from (select cnum, count(cnum) cntr from orders group by cnum) t where t.cntr > 1);
+
+       NUM NAME                                                                 
+---------- ----------                                                           
+      1001 Peel                                                                 
+      1002 Serres                                                               
+      1007 Rifkin                                                               
+      2004 Grass                                                                
+      2006 Clemens                                                              
+      2008 Cisneros                                                             
+
+6 rows selected.
+
+SQL> spool off
+SQL> select snum from salespeople where city = 'San Jose' union select cnum from customers where city = 'San Jose' union select onum from orders where odate = '03-OCT-90';
+
+      SNUM                                                                      
+----------                                                                      
+      1002                                                                      
+      2003                                                                      
+      2008                                                                      
+      3001                                                                      
+      3002                                                                      
+      3003                                                                      
+      3005                                                                      
+      3006                                                                      
+
+8 rows selected.
+
+SQL> spool off

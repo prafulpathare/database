@@ -11,7 +11,7 @@ begin
 			dbms_output.put_line(i);
 		end if;
 	end loop;
-	dbms_output.put_line('-------------------------');
+	dbms_output.put_line('-----------------------------------------');
 end;
 /
 
@@ -31,7 +31,7 @@ begin
 			dbms_output.put_line(num);
 		end if;
 	end loop;
-	dbms_output.put_line('-------------------------');
+	dbms_output.put_line('-----------------------------------------');
 end;
 /
 
@@ -61,7 +61,7 @@ begin
 		dbms_output.put_line('     Volume        : '||ROUND(((4/3*3.14)*minrad**3), 2));
 		minrad := minrad+incfact;
 	end loop;
-	dbms_output.put_line('-------------------------');
+	dbms_output.put_line('-----------------------------------------');
 end;
 /
 
@@ -78,6 +78,7 @@ begin
 		cntr := cntr + 1;
 	end loop;
 	dbms_output.put_line(cntr||' times numbers needs to be doubled to reach 1 Million');
+	dbms_output.put_line('-----------------------------------------');
 end;
 /
 
@@ -100,23 +101,37 @@ begin
 	else
 		dbms_output.put_line(strr||' is not a Palindrome.');
 	end if;
+	dbms_output.put_line('-----------------------------------------');
 end;
 /
 
 accept inum number prompt 'Number : '
 declare
 	num1 number(10);
-	rr number(10);
-	outnum varchar2(50) := '';
+	num_str varchar2(100) := '';
+	temp_num varchar2(10);
 begin
 	num1 := &inum;
 	
-	while num1 <> 0 loop
-		rr := mod(num1, 10);
-		dbms_output.put_line(num1||' '||rr);
-		num1 := trunc(num1/10);
+	for x in 1..length(num1) loop
+		temp_num := substr(num1, x, 1);
+		select decode(temp_num, 0, 'ZERO ',
+					1, 'ONE ',
+					2, 'TWO ',
+					3, 'THREE ',
+					4, 'FOUR ',
+					5, 'FIVE ',
+					6, 'SIX ',
+					7, 'SEVEN ',
+					8, 'EIGHT ',
+					9, 'NINE ',
+					'')
+			INTO TEMP_NUM FROM DUAL;
+
+		num_str := num_str||temp_num;
 	end loop;
-	
-		dbms_output.put_line('-----------------------------------------');
+
+	dbms_output.put_line(num1||'  '||num_str);
+	dbms_output.put_line('-----------------------------------------');
 end;
 /
